@@ -1,0 +1,287 @@
+---
+title: "An intro to data visualization with ggplot2"
+author: 'Niklas Johannes<br>  <a href="https://www.oii.ox.ac.uk/">Oxford Internet Institute</a><br><a href="http://twitter.com/NiklasJohannes"> <i class="fa fa-twitter fa-fw"></i>&nbsp; @NiklasJohannes</a>'
+date: "2021-03-19<br><br><br>Slides available at: <github.com>"
+output:
+  xaringan::moon_reader:
+    lib_dir: libs
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+---
+name: intended-audience
+
+```{r load-libraries, echo = FALSE, message=FALSE}
+library(tidyverse)
+library(cowplot)
+```
+
+
+# What to expect
+
+- New to R
+- Familiar with R, but new to data visualization in R
+- Basic intro with little code
+- You can go ahead and produce plots, but you shouldn't
+- There's only so much you can do in 45 min
+
+---
+name: outline
+
+# Outline
+
+1. Why visualization is important
+2. Some basic principles of data visualization
+3. Why R (and ggplot2)?
+4. Some basic examples
+5. Questions
+
+---
+class: inverse, center, middle
+
+# 1. Why visualization is important
+
+---
+name: why-visualize
+
+# Why bother?
+
+- Data visualization translates raw data into graphs
+- From data to meaning
+- Recognize patterns and trends
+- Easier to understand
+- But comes with huge responsibility!
+
+---
+name: anscombe
+
+# Anscombe's Quartett
+
+![Anscombe](https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/Anscombe%27s_quartet_3.svg/1200px-Anscombe%27s_quartet_3.svg.png)
+---
+name: datasaurus
+
+# Datasaurus Dozen
+
+![Datasaurus](https://blog.revolutionanalytics.com/downloads/DataSaurus%20Dozen.gif)
+
+(Alberto Cairo)
+---
+name: fox-news
+
+# What responsibility?
+
+![Fox](http://freerangestats.info/img/0176-fox-original.jfif)
+
+(Recreate properly with ggplot2: <http://freerangestats.info/blog/2020/04/06/crazy-fox-y-axis>)
+---
+name: propaganda
+
+# What responsibility?
+
+.pull-left[![Propaganda](materials/election.jpg)]
+
+.pull-right[
+- Hiding relevant data to highlight what benefits us
+- Displaying too much data to obscure reality
+- Using graphic forms in inappropriate ways (distorting the data)
+
+(Cairo, A. (2015). Graphics lies, misleading visuals. In New challenges for data design (pp. 103-116). Springer, London.)
+]
+
+---
+name: distorted-academia
+
+# What responsibility?
+
+```{r echo=FALSE}
+dat <- 
+  tibble(
+    Value = c(3.7, 4.1),
+    Group = c("Control", "Treatment")
+  )
+```
+
+.pull-left[
+```{r echo=FALSE}
+ggplot(dat, aes(x = Group, y = Value)) +
+  geom_bar(stat = "identity")
+```
+]
+
+.pull-right[
+```{r echo=FALSE}
+ggplot(dat, aes(x = Group, y = Value)) +
+  geom_bar(stat = "identity") +
+  ylim(c(0,100))
+```
+]
+
+---
+class: inverse, center, middle
+
+# 2. Some basic principles of data visualization
+
+---
+name: principles1
+
+# Principles
+
+1. **Keep it simple and stupid**
+
+.pull-left[
+```{r echo=FALSE}
+dat <- 
+  tibble(
+    x = rnorm(100),
+    y = 0.2 * x + rnorm(100),
+    gender = rep(c("men", "women"), each = 50)
+  )
+
+ggplot(data = dat, aes(x, y, color = gender)) +
+  geom_point()
+```
+]
+
+.pull-right[
+```{r echo=FALSE}
+ggplot(data = dat, aes(x, y, color)) +
+  geom_point() +
+  theme_cowplot()
+```
+
+]
+---
+name: principles2
+
+# Principles
+
+1. Keep it simple and stupid
+2. **Show your data**
+
+![Ban-bar-graphs](https://storage.googleapis.com/plos-corpus-prod/10.1371/journal.pbio.1002128/1/pbio.1002128.g001.PNG_L?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=wombat-sa%40plos-prod.iam.gserviceaccount.com%2F20210310%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20210310T153236Z&X-Goog-Expires=3600&X-Goog-SignedHeaders=host&X-Goog-Signature=8c96ccbf925b942e8964b3c95bdcd495560e1e314957e2f55f77f982c61231e81aac028c7c8834beb43f5513c147cac21dd1dbd9f1135b9d67d106d844239a67d640fcc750a05506e2e10d63a7d216c20aa37b145c04eec1345d8ff018f89da2208e9702c84eeff4cff28d34627d25b6bf4332d63d1d7cc3b066c77c6704ff22c283c4faaa57763e68b988c36a5c477410cd1a06b002f09be6af46ee52e52dd2e5f8ea13c8e866ca1e086a800e7dcf0b305cdab068b075660015b5666b85d80f1e92d973f4dc5efab2ec612631ee8f2b7d0a69c167fee07f569e5e7182cd7e215bea808ef476d8a097a4d4e514cfe8628ad477d8ae92d093b8b750d713b3fad0)
+
+(From Weissgerber, T. L., Milic, N. M., Winham, S. J., & Garovic, V. D. (2015). Beyond bar and line graphs: time for a new data presentation paradigm. PLoS Biol, 13(4), e1002128.)
+---
+
+name: principles2.2
+
+# Principles
+
+1. Keep it simple and stupid
+2. **Show your data**
+
+![Bar-bar-graphs](materials/kickstarter.jpg)
+
+(From <https://www.kickstarter.com/projects/1474588473/barbarplots>)
+---
+name: principles3
+
+# Principles
+
+1. Keep it simple and stupid
+2. Show your data
+3. **Data-to-ink ratio (Tufte)**
+
+.pull-left[
+![Low-Ratio](https://infovis-wiki.net/w/images/2/2e/Dir1.png)
+]
+
+.pull-right[
+![High-Ratio](https://infovis-wiki.net/w/images/1/1b/Dir2.png)
+]
+
+(From <https://infovis-wiki.net/wiki/Data-Ink_Ratio>)
+---
+name: principles4
+
+# Principles
+
+1. Keep it simple and stupid
+2. Show your data
+3. Data-to-ink ratio (Tufte)
+4. **Know what you want to communicate**
+
+.pull-left[
+```{r echo=FALSE}
+ggplot(data = dat, aes(x, y, color = gender)) +
+  geom_point() +
+  facet_wrap(~ gender) +
+  theme_cowplot() +
+  theme(legend.position = "none")
+```
+]
+
+.pull-right[
+```{r echo=FALSE}
+ggplot(data = dat, aes(x, color = gender)) +
+  geom_density() +
+  theme_cowplot()
+```
+]
+---
+name: principles5
+
+# Principles
+
+1. Keep it simple and stupid
+2. Show your data
+3. Data-to-ink ratio (Tufte)
+4. Know what you want to communicate
+5. **In proportion and with correct axes**
+
+.pull-left[
+![Two-Axes](https://blog.datawrapper.de/img/full-180508_index2.png)
+]
+
+.pull-right[
+![Two-Axes-Two-Plots](https://blog.datawrapper.de/img/full-180508_index10.png)
+]
+
+(From <https://blog.datawrapper.de/dualaxis/>)
+---
+name: principles6
+
+# Principles
+
+1. Keep it simple and stupid
+2. Show your data
+3. Data-to-ink ratio (Tufte)
+4. Know what you want to communicate
+5. In proportion and with correct axes
+6. **Use color, size, position to make clear what's important**
+
+.pull-left[
+```{r, echo=FALSE, message=FALSE}
+dat <- 
+  tibble(
+    gender = rep(c("men", "women"), each = 100),
+    x = rnorm(200)
+  ) %>% 
+  mutate(
+    y = if_else(gender == "men", x * 0.1 + rnorm(100), x * 0.8 + rnorm(100))
+  )
+
+ggplot(dat, aes(x, y, shape = gender))+
+  geom_point() +
+  geom_smooth(method = "lm", color = "black")
+```
+
+]
+
+.pull-right[
+```{r echo=FALSE, message=FALSE}
+ggplot(dat, aes(x, y, color = gender))+
+  geom_point() +
+  geom_smooth(method = "lm") +
+  theme_cowplot()
+```
+
+]
+---
+class: inverse, center, middle
+
+# 3. Why R (and ggplot2)?
+
+---

@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>An intro to data visualization with ggplot2</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Niklas Johannes  Oxford Internet Institute    @NiklasJohannes" />
+    <script src="libs/header-attrs-2.7/header-attrs.js"></script>
+    <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
+    <link href="libs/remark-css-0.0.1/default-fonts.css" rel="stylesheet" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# An intro to data visualization with ggplot2
+### Niklas Johannes<br> <a href="https://www.oii.ox.ac.uk/">Oxford Internet Institute</a><br><a href="http://twitter.com/NiklasJohannes"> <i class="fa fa-twitter fa-fw"></i>  <span class="citation">@NiklasJohannes</span></a>
+### 2021-03-19<br><br><br>Slides available at: &lt;github.com&gt;
+
+---
+
+name: intended-audience
+
+
+
+
+# What to expect
+
+- New to R
+- Familiar with R, but new to data visualization in R
+- Basic intro with little code
+- You can go ahead and produce plots, but you shouldn't
+- There's only so much you can do in 45 min
+
+---
+name: outline
+
+# Outline
+
+1. Why visualization is important
+2. Some basic principles of data visualization
+3. Why R (and ggplot2)?
+4. Some basic examples
+5. Questions
+
+---
+class: inverse, center, middle
+
+# 1. Why visualization is important
+
+---
+name: why-visualize
+
+# Why bother?
+
+- Data visualization translates raw data into graphs
+- From data to meaning
+- Recognize patterns and trends
+- Easier to understand
+- But comes with huge responsibility!
+
+---
+name: anscombe
+
+# Anscombe's Quartett
+
+![Anscombe](https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/Anscombe%27s_quartet_3.svg/1200px-Anscombe%27s_quartet_3.svg.png)
+---
+name: datasaurus
+
+# Datasaurus Dozen
+
+![Datasaurus](https://blog.revolutionanalytics.com/downloads/DataSaurus%20Dozen.gif)
+
+(Alberto Cairo)
+---
+name: fox-news
+
+# What responsibility?
+
+![Fox](http://freerangestats.info/img/0176-fox-original.jfif)
+
+(Recreate properly with ggplot2: &lt;http://freerangestats.info/blog/2020/04/06/crazy-fox-y-axis&gt;)
+---
+name: propaganda
+
+# What responsibility?
+
+.pull-left[![Propaganda](materials/election.jpg)]
+
+.pull-right[
+- Hiding relevant data to highlight what benefits us
+- Displaying too much data to obscure reality
+- Using graphic forms in inappropriate ways (distorting the data)
+
+(Cairo, A. (2015). Graphics lies, misleading visuals. In New challenges for data design (pp. 103-116). Springer, London.)
+]
+
+---
+name: distorted-academia
+
+# What responsibility?
+
+
+
+.pull-left[
+![](intro_ggplot2_slides_files/figure-html/unnamed-chunk-2-1.png)&lt;!-- --&gt;
+]
+
+.pull-right[
+![](intro_ggplot2_slides_files/figure-html/unnamed-chunk-3-1.png)&lt;!-- --&gt;
+]
+
+---
+class: inverse, center, middle
+
+# 2. Some basic principles of data visualization
+
+---
+name: principles1
+
+# Principles
+
+1. **Keep it simple and stupid**
+
+.pull-left[
+![](intro_ggplot2_slides_files/figure-html/unnamed-chunk-4-1.png)&lt;!-- --&gt;
+]
+
+.pull-right[
+![](intro_ggplot2_slides_files/figure-html/unnamed-chunk-5-1.png)&lt;!-- --&gt;
+
+]
+---
+name: principles2
+
+# Principles
+
+1. Keep it simple and stupid
+2. **Show your data**
+
+![Ban-bar-graphs](https://storage.googleapis.com/plos-corpus-prod/10.1371/journal.pbio.1002128/1/pbio.1002128.g001.PNG_L?X-Goog-Algorithm=GOOG4-RSA-SHA256&amp;X-Goog-Credential=wombat-sa%40plos-prod.iam.gserviceaccount.com%2F20210310%2Fauto%2Fstorage%2Fgoog4_request&amp;X-Goog-Date=20210310T153236Z&amp;X-Goog-Expires=3600&amp;X-Goog-SignedHeaders=host&amp;X-Goog-Signature=8c96ccbf925b942e8964b3c95bdcd495560e1e314957e2f55f77f982c61231e81aac028c7c8834beb43f5513c147cac21dd1dbd9f1135b9d67d106d844239a67d640fcc750a05506e2e10d63a7d216c20aa37b145c04eec1345d8ff018f89da2208e9702c84eeff4cff28d34627d25b6bf4332d63d1d7cc3b066c77c6704ff22c283c4faaa57763e68b988c36a5c477410cd1a06b002f09be6af46ee52e52dd2e5f8ea13c8e866ca1e086a800e7dcf0b305cdab068b075660015b5666b85d80f1e92d973f4dc5efab2ec612631ee8f2b7d0a69c167fee07f569e5e7182cd7e215bea808ef476d8a097a4d4e514cfe8628ad477d8ae92d093b8b750d713b3fad0)
+
+(From Weissgerber, T. L., Milic, N. M., Winham, S. J., &amp; Garovic, V. D. (2015). Beyond bar and line graphs: time for a new data presentation paradigm. PLoS Biol, 13(4), e1002128.)
+---
+
+name: principles2.2
+
+# Principles
+
+1. Keep it simple and stupid
+2. **Show your data**
+
+![Bar-bar-graphs](materials/kickstarter.jpg)
+
+(From &lt;https://www.kickstarter.com/projects/1474588473/barbarplots&gt;)
+---
+name: principles3
+
+# Principles
+
+1. Keep it simple and stupid
+2. Show your data
+3. **Data-to-ink ratio (Tufte)**
+
+.pull-left[
+![Low-Ratio](https://infovis-wiki.net/w/images/2/2e/Dir1.png)
+]
+
+.pull-right[
+![High-Ratio](https://infovis-wiki.net/w/images/1/1b/Dir2.png)
+]
+
+(From &lt;https://infovis-wiki.net/wiki/Data-Ink_Ratio&gt;)
+---
+name: principles4
+
+# Principles
+
+1. Keep it simple and stupid
+2. Show your data
+3. Data-to-ink ratio (Tufte)
+4. **Know what you want to communicate**
+
+.pull-left[
+![](intro_ggplot2_slides_files/figure-html/unnamed-chunk-6-1.png)&lt;!-- --&gt;
+]
+
+.pull-right[
+![](intro_ggplot2_slides_files/figure-html/unnamed-chunk-7-1.png)&lt;!-- --&gt;
+]
+---
+name: principles5
+
+# Principles
+
+1. Keep it simple and stupid
+2. Show your data
+3. Data-to-ink ratio (Tufte)
+4. Know what you want to communicate
+5. **In proportion and with correct axes**
+
+.pull-left[
+![Two-Axes](https://blog.datawrapper.de/img/full-180508_index2.png)
+]
+
+.pull-right[
+![Two-Axes-Two-Plots](https://blog.datawrapper.de/img/full-180508_index10.png)
+]
+
+(From &lt;https://blog.datawrapper.de/dualaxis/&gt;)
+---
+name: principles6
+
+# Principles
+
+1. Keep it simple and stupid
+2. Show your data
+3. Data-to-ink ratio (Tufte)
+4. Know what you want to communicate
+5. In proportion and with correct axes
+6. **Use color, size, position to make clear what's important**
+
+.pull-left[
+![](intro_ggplot2_slides_files/figure-html/unnamed-chunk-8-1.png)&lt;!-- --&gt;
+
+]
+
+.pull-right[
+![](intro_ggplot2_slides_files/figure-html/unnamed-chunk-9-1.png)&lt;!-- --&gt;
+
+]
+---
+class: inverse, center, middle
+
+# 3. Why R (and ggplot2)?
+
+---
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
