@@ -5,8 +5,7 @@
     <meta charset="utf-8" />
     <meta name="author" content="Niklas Johannes  Oxford Internet Institute    @NiklasJohannes" />
     <script src="libs/header-attrs-2.7/header-attrs.js"></script>
-    <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
-    <link href="libs/remark-css-0.0.1/default-fonts.css" rel="stylesheet" />
+    <link rel="stylesheet" href="my-theme.css" type="text/css" />
   </head>
   <body>
     <textarea id="source">
@@ -138,7 +137,7 @@ name: principles2
 1. Keep it simple and stupid
 2. **Show your data**
 
-![Ban-bar-graphs](https://storage.googleapis.com/plos-corpus-prod/10.1371/journal.pbio.1002128/1/pbio.1002128.g001.PNG_L?X-Goog-Algorithm=GOOG4-RSA-SHA256&amp;X-Goog-Credential=wombat-sa%40plos-prod.iam.gserviceaccount.com%2F20210310%2Fauto%2Fstorage%2Fgoog4_request&amp;X-Goog-Date=20210310T153236Z&amp;X-Goog-Expires=3600&amp;X-Goog-SignedHeaders=host&amp;X-Goog-Signature=8c96ccbf925b942e8964b3c95bdcd495560e1e314957e2f55f77f982c61231e81aac028c7c8834beb43f5513c147cac21dd1dbd9f1135b9d67d106d844239a67d640fcc750a05506e2e10d63a7d216c20aa37b145c04eec1345d8ff018f89da2208e9702c84eeff4cff28d34627d25b6bf4332d63d1d7cc3b066c77c6704ff22c283c4faaa57763e68b988c36a5c477410cd1a06b002f09be6af46ee52e52dd2e5f8ea13c8e866ca1e086a800e7dcf0b305cdab068b075660015b5666b85d80f1e92d973f4dc5efab2ec612631ee8f2b7d0a69c167fee07f569e5e7182cd7e215bea808ef476d8a097a4d4e514cfe8628ad477d8ae92d093b8b750d713b3fad0)
+![Ban-bar-graphs](https://storage.googleapis.com/plos-corpus-prod/10.1371/journal.pbio.1002128/1/pbio.1002128.g001.PNG_L?X-Goog-Algorithm=GOOG4-RSA-SHA256&amp;X-Goog-Credential=wombat-sa%40plos-prod.iam.gserviceaccount.com%2F20210316%2Fauto%2Fstorage%2Fgoog4_request&amp;X-Goog-Date=20210316T093312Z&amp;X-Goog-Expires=3600&amp;X-Goog-SignedHeaders=host&amp;X-Goog-Signature=072660ae0abe9de5b52d557ca8cc5665308d572ade0820e9ab0df0d71703ac2d5d3a3a9153f0da9bde27cd9c537ac21f7d7e9e553e0173a5d80e2b8808caa7d292cf510a4dc6c578017eb0b898c4da1f627c64a20a21799286d167564c41b3dd2a162a7cab61babdcb7d555c66f364b194bb363b875acadd2024d8c160a2e0300bfb38f235501e317d391135ca8d1d4c241d895e1f4b27450b0fe6dd62dc74129090e974b35436fdc21c038da2fc5706ca6ebe96162179c1ac39ba1dc40993733c3975a0ad60f917d47f5b2e2f0f42a34e23ef7f8ec4d64cfdf0cead4877e50259ee22140078defd0c002bd4254042e47126f4487466130a9d3340a47ab35941)
 
 (From Weissgerber, T. L., Milic, N. M., Winham, S. J., &amp; Garovic, V. D. (2015). Beyond bar and line graphs: time for a new data presentation paradigm. PLoS Biol, 13(4), e1002128.)
 ---
@@ -227,7 +226,6 @@ name: principles6
 
 .pull-right[
 ![](intro_ggplot2_slides_files/figure-html/unnamed-chunk-9-1.png)&lt;!-- --&gt;
-
 ]
 ---
 class: inverse, center, middle
@@ -235,6 +233,1596 @@ class: inverse, center, middle
 # 3. Why R (and ggplot2)?
 
 ---
+name: why-ggplot
+
+# Why R (and ggplot2)?
+
+- Reusable, reproducible, efficient
+- `ggplot2` de facto standard for R users
+- Flexible, highly customizable
+- Consistent underlying logic in creating graphs: (Layered) grammar of graphics
+- Publication-level output
+- Active user base with infinite resources online (Stackoverflow etc.)
+- Pretty
+
+---
+name: ggplotbook
+
+# Go-to resource
+
+&lt;img src="https://ggplot2-book.org/cover.jpg" width="30%" align="center" /&gt;
+
+&lt;https://ggplot2-book.org/index.html&gt;
+
+---
+name: grammar1
+
+# Grammar of graphics
+
+&gt; In brief, the grammar tells us that a **graphic maps the data to the aesthetic attributes (colour, shape, size) of geometric objects** (points, lines, bars).
+
+&gt; The grammar makes it easier for you to **iteratively update a plot, changing a single feature at a time**. The grammar is also useful because it suggests the high-level aspects of a plot that can be changed, giving you a framework to think about graphics, and hopefully **shortening the distance from mind to paper**. It also encourages the use of graphics customised to a particular problem, rather than relying on specific chart types.
+
+---
+name: grammar2
+
+# Grammar of graphics
+
+&lt;img src="https://miro.medium.com/max/3840/1*mcLnnVdHNg-ikDbHJfHDNA.png" width="80%" class="center" /&gt;
+
+- Think of the layers as building blocks
+- Combine and shuffle them to create any kind of graph you want
+- The use of these layers is hierarchical and logically consistent
+
+(From &lt;https://towardsdatascience.com/a-comprehensive-guide-to-the-grammar-of-graphics-for-effective-visualization-of-multi-dimensional-1f92b4ed4149&gt;)
+(See also &lt;http://vita.had.co.nz/papers/layered-grammar.pdf&gt;)
+---
+name: layers
+
+# So what are these layers?
+
+- **data**: observations organized as variables
+- **aesthetic mapping**: maps variables in the data to aesthetic qualities/categories (e.g., variables to color or shape)
+- **scales**: implement the mapping, turning values in the data into values in the graph (e.g., how groups get assigned colors, create axes and legends)
+- **geometric objects (geoms)**: turns values in the data into geometric objects (e.g., points lines)
+- **stats**: summarize and transform data values
+- **facets**: how shall we "split up" the graph into displaying subsets of the data
+- **coord**: coordinate system, how are data coordinates translated to the space of the graph
+- **themes**: fine-tune the looks of your graph
+---
+name: layers-data1
+
+# Data
+
+&lt;table&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;"&gt;   &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; mpg &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; cyl &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; disp &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; hp &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; drat &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; wt &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; qsec &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; vs &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; am &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; gear &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; carb &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Mazda RX4 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 21.0 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 6 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 160 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 110 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 3.90 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 2.620 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 16.46 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 4 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 4 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Mazda RX4 Wag &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 21.0 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 6 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 160 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 110 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 3.90 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 2.875 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 17.02 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 4 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 4 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Datsun 710 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 22.8 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 4 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 108 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 93 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 3.85 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 2.320 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 18.61 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 4 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Hornet 4 Drive &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 21.4 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 6 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 258 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 110 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 3.08 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 3.215 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 19.44 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 3 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Hornet Sportabout &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 18.7 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 8 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 360 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 175 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 3.15 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 3.440 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 17.02 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 3 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 2 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Valiant &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 18.1 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 6 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 225 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 105 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 2.76 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 3.460 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 20.22 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 3 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+
+---
+name: layers-data2
+
+# Data
+.pull-left[
+Nothing happens yet: We just told `ggplot2` what data to translate to a graph.
+
+```r
+ggplot(data = my_cars)
+```
+]
+
+.pull-right[
+![](intro_ggplot2_slides_files/figure-html/unnamed-chunk-13-1.png)&lt;!-- --&gt;
+]
+---
+name: layers-aesthetics
+
+# Aesthetic mapping
+
+.pull-left[
+Next, we tell `ggplot2` what variables to map to which properties: the `mpg` variable to the x axis and the `disp` variable to the y axis.
+
+```r
+ggplot(
+  data = my_cars,
+* aes(
+*   x = mpg,
+*   y = disp
+* )
+)
+```
+]
+
+.pull-right[
+![](intro_ggplot2_slides_files/figure-html/unnamed-chunk-15-1.png)&lt;!-- --&gt;
+]
+
+---
+name: layers-geoms
+
+# Geoms
+
+.pull-left[
+Time to translate those mappings into something we can see: a point for each x-y-combination.
+
+```r
+ggplot(
+  data = my_cars,
+  aes(
+    x = mpg,
+    y = disp
+  )
+) +
+* geom_point()
+```
+]
+
+.pull-right[
+![](intro_ggplot2_slides_files/figure-html/unnamed-chunk-17-1.png)&lt;!-- --&gt;
+]
+
+---
+name: layers-facets
+
+# Facets
+
+.pull-left[
+Now we tell `ggplot2` that we want to display subsets of the data, with one facet per set.
+
+```r
+ggplot(
+  data = my_cars,
+  aes(
+    x = mpg,
+    y = disp
+  )
+) +
+  geom_point() +
+* facet_wrap(~ cyl)
+```
+]
+
+.pull-right[
+![](intro_ggplot2_slides_files/figure-html/unnamed-chunk-19-1.png)&lt;!-- --&gt;
+]
+
+---
+name: revisit-aesthetics1
+
+# Back to aesthetic mapping
+
+.pull-left[
+Let's add another aesthetic: We tell `ggplot2` that we want another variable mapped to a separate visual property: not one of the axes, but color this time.
+
+```r
+ggplot(
+  data = my_cars,
+  aes(
+    x = mpg,
+    y = disp,
+*   color = cyl
+  )
+) +
+  geom_point() 
+```
+]
+
+.pull-right[
+![](intro_ggplot2_slides_files/figure-html/unnamed-chunk-21-1.png)&lt;!-- --&gt;
+]
+
+---
+name: revisit-aesthetics2
+
+# Back to aesthetic mapping
+
+.pull-left[
+What's happening? Why can't we just assign the color inside the geom?
+
+```r
+ggplot(
+  data = my_cars,
+  aes(
+    x = mpg,
+    y = disp
+  )
+) +
+  geom_point(
+*   color = cyl
+  ) 
+```
+
+```
+## Error in layer(data = data, mapping = mapping, stat = stat, geom = GeomPoint, : object 'cyl' not found
+```
+]
+
+---
+name: revisit-aesthetics3
+
+# Back to aesthetic mapping
+
+.pull-left[
+The `color` argument inside our geom expects, well, a color. We're not saying "Map the values in this variable to different colors". We're saying "All points in this geom should have the color `cyl`." But `cyl` isn't a color.
+
+```r
+ggplot(
+  data = my_cars,
+  aes(
+    x = mpg,
+    y = disp
+  )
+) +
+  geom_point(
+*   color = "pink"
+  ) 
+```
+]
+
+.pull-right[
+![](intro_ggplot2_slides_files/figure-html/unnamed-chunk-24-1.png)&lt;!-- --&gt;
+]
+
+---
+name: revisit-aesthetics4
+
+# Back to aesthetic mapping
+
+.pull-left[
+For mapping color (i.e., an aesthetic) we need the `aes` (= aesthetics) argument. We can put this argument into our geom specifically instead of specifying it for the entire plot.
+
+```r
+ggplot(
+  data = my_cars,
+  aes(
+    x = mpg,
+    y = disp
+  )
+) +
+  geom_point(
+*   aes(
+*     color = cly
+*   )
+  ) 
+```
+]
+
+.pull-right[
+![](intro_ggplot2_slides_files/figure-html/unnamed-chunk-26-1.png)&lt;!-- --&gt;
+]
+
+---
+name: revisit-geoms1
+
+# Back to geoms
+
+.pull-left[
+Let's add another geom: this is where the layer grammar really has its strengths.
+
+```r
+ggplot(
+  data = my_cars,
+  aes(
+    x = mpg,
+    y = disp,
+    color = cyl
+  )
+) +
+  geom_point() +
+* geom_smooth(
+*   method = "lm"
+* )
+```
+]
+
+.pull-right[
+
+```
+## `geom_smooth()` using formula 'y ~ x'
+```
+
+![](intro_ggplot2_slides_files/figure-html/unnamed-chunk-28-1.png)&lt;!-- --&gt;
+]
+
+---
+name: revisit-geoms2
+
+# Back to geoms
+
+.pull-left[
+Where we map aesthetics matters: If we map the `cyl` variable to color only in the point geom, that's the only place where the colors are assigned, but not for the regression lines.
+
+```r
+ggplot(
+  data = my_cars,
+  aes(
+    x = mpg,
+    y = disp
+  )
+) +
+  geom_point(
+*   aes(
+*     color = cyl
+*   )
+  ) +
+  geom_smooth(
+    method = "lm"
+  )
+```
+]
+
+.pull-right[
+We didn't tell `ggplot2` anywhere that the line colors should be mapped to a variable.
+![](intro_ggplot2_slides_files/figure-html/unnamed-chunk-30-1.png)&lt;!-- --&gt;
+]
+
+---
+name: revisit-geoms3
+
+# Back to geoms
+
+.pull-left[
+So we can map for each geom.
+
+```r
+ggplot(
+  data = my_cars,
+  aes(
+    x = mpg,
+    y = disp
+  )
+) +
+  geom_point(
+*   aes(
+*     color = cyl
+*   )
+  ) +
+  geom_smooth(
+*   aes(
+*     color = cyl
+*   ),
+    method = "lm"
+  )
+```
+]
+
+.pull-right[
+![](intro_ggplot2_slides_files/figure-html/unnamed-chunk-32-1.png)&lt;!-- --&gt;
+]
+
+---
+name: revisit-geoms4
+
+# Back to geoms
+
+.pull-left[
+Or each geom "inherits" from our initial mapping.
+
+```r
+ggplot(
+  data = my_cars,
+  aes(
+    x = mpg,
+    y = disp,
+*   color = cyl
+  )
+) +
+  geom_point() +
+  geom_smooth(
+    method = "lm"
+  )
+```
+]
+
+.pull-right[
+![](intro_ggplot2_slides_files/figure-html/unnamed-chunk-34-1.png)&lt;!-- --&gt;
+]
+
+---
+name: scales
+
+# What about the scales layer?
+
+.pull-left[
+Now we scale from the data realm (i.e., our data frame) to the aesthetic realm. In our case: Adjust axis-range.
+
+```r
+ggplot(
+  data = my_cars,
+  aes(
+    x = mpg,
+    y = disp
+  )
+) +
+* scale_x_continuous(
+*   name = "Miles per Gallon",
+*   limits = c(8, 36)
+* ) +
+* scale_y_continuous(
+*   name = "Displacement",
+*   limits = c(0, 550)
+* ) +
+  geom_point()
+```
+]
+
+.pull-right[
+![](intro_ggplot2_slides_files/figure-html/unnamed-chunk-36-1.png)&lt;!-- --&gt;
+]
+
+---
+name: scales2
+
+# What about the scales layer?
+
+.pull-left[
+`ggplot2` scales automatically to see the full data, but you can overwrite that.
+
+```r
+ggplot(
+  data = my_cars,
+  aes(
+    x = mpg,
+    y = disp
+  )
+) +
+* scale_x_continuous(
+*   name = "Miles per Gallon",
+*   limits = c(10, 15)
+* ) +
+* scale_y_continuous(
+*   name = "Displacement",
+*   limits = c(200, 400)
+* ) +
+  geom_point()
+```
+]
+
+.pull-right[
+
+```
+## Warning: Removed 29 rows containing missing values (geom_point).
+```
+
+![](intro_ggplot2_slides_files/figure-html/unnamed-chunk-38-1.png)&lt;!-- --&gt;
+]
+
+---
+name: stats1
+
+# The stats layer
+
+.pull-left[
+Here we tell `ggplot2` to do the work for us: Don't count how many cars with each number of `cyl` there are, but calculate the mean for each group of `cyl`.
+
+```r
+ggplot(
+  data = my_cars,
+  aes(
+    x = cyl,
+    y = disp
+  )
+) +
+* stat_summary(
+*   fun = "mean",
+*   geom = "bar"
+* )
+```
+]
+
+.pull-right[
+![](intro_ggplot2_slides_files/figure-html/unnamed-chunk-40-1.png)&lt;!-- --&gt;
+]
+
+---
+name: stats2
+
+# The stats layer
+
+.pull-left[
+Then we tell `ggplot2` to also calculate error bars.
+
+```r
+ggplot(
+  data = my_cars,
+  aes(
+    x = cyl,
+    y = disp
+  )
+) +
+  stat_summary(
+    fun = "mean",
+    geom = "bar"
+  ) +
+* stat_summary(
+*   fun.data = mean_cl_normal,
+*   geom = "errorbar",
+*   width = 0.05
+* )
+```
+]
+
+.pull-right[
+![](intro_ggplot2_slides_files/figure-html/unnamed-chunk-42-1.png)&lt;!-- --&gt;
+]
+
+---
+name: stats3
+
+# The stats layer
+
+I prefer to calculate summary stats myself and visualize them directly with ggplot.
+
+```r
+my_stats &lt;- 
+  my_cars %&gt;% 
+  group_by(cyl) %&gt;% 
+  summarise(
+    mean = mean(disp),
+    ci_low = mean_cl_normal(disp)[1, 2],
+    ci_high = mean_cl_normal(disp)[1, 3]
+  )
+```
+
+&lt;table&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;"&gt; cyl &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; mean &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; ci_low &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; ci_high &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 4 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 105.1364 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 87.08378 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 123.1889 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 6 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 183.3143 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 144.87542 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 221.7532 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 8 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 353.1000 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 313.97000 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 392.2300 &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+---
+name: manual-stats1
+
+# Creating graphs from own summary stats
+
+.pull-left[
+Then we tell `ggplot2` to visualize the stats that we calculated: first a geom for the means.
+
+```r
+ggplot(
+* data = my_stats,
+  aes(
+    x = cyl,
+    y = mean
+  )
+) +
+* geom_bar(
+*   stat = "identity"
+* )
+```
+]
+
+.pull-right[
+![](intro_ggplot2_slides_files/figure-html/unnamed-chunk-46-1.png)&lt;!-- --&gt;
+]
+
+---
+name: manual-stats2
+
+# Creating graphs from own summary stats
+
+.pull-left[
+Then a geom for the error bars, where we tell `ggplot2` where the error bars should begin and end.
+
+```r
+ggplot(
+  data = my_stats,
+  aes(
+    x = cyl,
+    y = mean
+  )
+) +
+  geom_bar(
+    stat = "identity"
+  ) +
+* geom_errorbar(
+*   aes(
+*     ymin = ci_low,
+*     ymax = ci_high
+*   ),
+*   width = 0.05
+* )
+```
+]
+
+.pull-right[
+![](intro_ggplot2_slides_files/figure-html/unnamed-chunk-48-1.png)&lt;!-- --&gt;
+]
+
+---
+name: why-own-stats
+
+# Why would we do that?
+
+Remember the principle of showing your data?
+
+![Bar-bar-graphs](materials/kickstarter.jpg)
+
+---
+name: mixing-data-frames
+
+# Showing both raw and aggregated data
+
+.pull-left[
+We can start with showing the raw data (i.e., individual data points).
+
+```r
+ggplot(
+* data = my_cars,
+  aes(
+    x = cyl,
+    y = disp,
+    color = cyl
+  )
+) +
+  geom_point()
+```
+]
+
+.pull-right[
+![](intro_ggplot2_slides_files/figure-html/unnamed-chunk-50-1.png)&lt;!-- --&gt;
+]
+
+---
+name: mixing-data-frames2
+
+# Showing both raw and aggregated data
+
+.pull-left[
+Let's add a bit of jitter so it's easier to see the points.
+
+```r
+ggplot(
+  data = my_cars,
+  aes(
+    x = cyl,
+    y = disp,
+    color = cyl
+  )
+) +
+  geom_point(
+*   position = position_dodge2(0.2)
+  )
+```
+]
+
+.pull-right[
+![](intro_ggplot2_slides_files/figure-html/unnamed-chunk-52-1.png)&lt;!-- --&gt;
+]
+---
+name: mixing-data-frames3
+
+# Showing both raw and aggregated data
+
+.pull-left[
+Now `ggplot2` doesn't have to calculate summary stats for us. We can add a geom that refers to a different data set that contains that info: our summary stats.
+.small[
+
+```r
+ggplot(
+  data = my_cars,
+  aes(
+    x = cyl,
+    y = disp,
+    color = cyl
+  )
+) +
+  geom_point(
+    position = position_dodge2(0.2)
+  ) +
+  geom_point(
+*   data = my_stats,
+*   aes(
+*     x = cyl,
+*     y = mean,
+*     color = cyl
+*   )
+  )
+```
+]
+]
+
+.pull-right[
+![](intro_ggplot2_slides_files/figure-html/unnamed-chunk-54-1.png)&lt;!-- --&gt;
+]
+---
+name: mixing-data-frames4
+
+# Showing both raw and aggregated data
+
+.pull-left[
+Our summary stats data set also contains the lower and upper CI. We include a geom to visualize them.
+.small[
+
+```r
+ggplot(
+  data = my_cars,
+  aes(
+    x = cyl,
+    y = disp,
+    color = cyl
+  )
+) +
+  geom_point(
+    position = position_dodge2(0.2)
+  ) +
+  geom_point(
+    data = my_stats,
+    aes(
+      x = cyl,
+      y = mean,
+      color = cyl
+    )
+  ) +
+* geom_errorbar(
+*   data = my_stats,
+*   aes(
+*     x = cyl,
+*     y = mean,
+*     ymin = ci_low,
+*     ymax = ci_high,
+*     color = cyl
+*   ),
+*   width = 0
+* )
+```
+]
+]
+
+.pull-right[
+![](intro_ggplot2_slides_files/figure-html/unnamed-chunk-56-1.png)&lt;!-- --&gt;
+]
+---
+name: making-it-pretty
+
+# Making it pretty
+.small[
+
+.pull-left[
+
+```r
+ggplot(
+  data = my_cars,
+  aes(
+    x = cyl,
+    y = disp,
+    color = cyl
+  )
+) +
+  geom_point(
+    position = position_dodge2(0.2)
+  ) +
+  geom_point(
+    data = my_stats,
+*   size = 4,
+    aes(
+      x = cyl,
+      y = mean,
+      color = cyl
+    )
+  ) +
+  geom_errorbar(
+    data = my_stats,
+    aes(
+      x = cyl,
+      y = mean,
+      ymin = ci_low,
+      ymax = ci_high,
+      color = cyl
+    ),
+    width = 0
+  ) +
+* scale_x_discrete(name = "Numer of Cylinders") +
+* scale_y_continuous(name = "Displacement") +
+* theme_cowplot() +
+* theme(legend.position = "none")
+```
+]
+]
+
+.pull-right[
+![](intro_ggplot2_slides_files/figure-html/unnamed-chunk-58-1.png)&lt;!-- --&gt;
+]
+
+---
+name: layers-as-objects1
+
+# Graphs (and layers) as objects
+
+R is an object-based language, and `ggplot2` is not exception. It saves us time and makes treating layers of the plot as building blocks easier.
+
+.pull-left[
+
+```r
+# assign the object
+layer1 &lt;- 
+  ggplot(
+    data = my_cars,
+    aes(
+      x = cyl,
+      y = disp,
+      color = cyl
+    )
+  )
+# call the object
+layer1
+```
+]
+
+.pull-right[
+![](intro_ggplot2_slides_files/figure-html/unnamed-chunk-60-1.png)&lt;!-- --&gt;
+]
+---
+name: layers-as-objects3
+
+# Graphs (and layers) as objects
+
+Assigning components let's us experiment with different layers and geoms.
+
+.pull-left[
+
+```r
+layer2 &lt;- 
+  geom_point(
+    position = position_dodge2(0.2)
+  )
+
+# call objects
+layer1 + layer2
+```
+]
+
+.pull-right[
+![](intro_ggplot2_slides_files/figure-html/unnamed-chunk-62-1.png)&lt;!-- --&gt;
+]
+---
+name: layers-as-objects4
+
+# Graphs (and layers) as objects
+
+Assigning components let's us experiment with different layers and geoms.
+
+.pull-left[
+
+```r
+layer2 &lt;- 
+* geom_violin()
+
+# call objects
+layer1 + layer2
+```
+]
+
+.pull-right[
+![](intro_ggplot2_slides_files/figure-html/unnamed-chunk-64-1.png)&lt;!-- --&gt;
+]
+---
+name: layers-as-objects5
+
+# Graphs (and layers) as objects
+
+This way, we can recreate the previous figure with a different geom.
+
+.small[
+.pull-left[
+
+```r
+our_figure &lt;- 
+  layer1 +
+  layer2 +
+  geom_point(
+    data = my_stats,
+    aes(
+      x = cyl,
+      y = mean,
+      color = cyl
+    )
+  ) +
+  geom_errorbar(
+    data = my_stats,
+    aes(
+      x = cyl,
+      y = mean,
+      ymin = ci_low,
+      ymax = ci_high,
+      color = cyl
+    ),
+    width = 0
+  ) +
+  scale_x_discrete(name = "Numer of Cylinders") +
+  scale_y_continuous(name = "Displacement") +
+  theme_cowplot() +
+  theme(legend.position = "none")
+
+# call figure
+our_figure
+```
+]
+]
+
+.pull-right[
+![](intro_ggplot2_slides_files/figure-html/unnamed-chunk-66-1.png)&lt;!-- --&gt;
+]
+
+---
+name: save-graph
+
+# Saving graphs
+
+Submitting figures to a journal in the right format, size, and resolution can be a real pain. Thankfully, `ggplot2` makes it easy.
+
+```r
+ggsave(
+  plot = our_figure, # which graph to save
+  filename = "figures/figure1.tiff",
+  dpi = 300, # resolution
+  height = 10,
+  width = 8,
+  units = "in"
+)
+```
+
+---
+name: examples-overview
+
+# Some more examples
+
+1. Showing distributions
+2. Showing (regression) results
+
+---
+name: histograms1
+
+# Showing distributions: Histograms
+.pull-left[
+
+```r
+ggplot(
+  data = iris,
+  aes(
+    x = Sepal.Length
+  )
+) +
+  geom_histogram(
+    fill = "#009E73"
+  ) +
+  labs(
+    x = "Sepal length",
+    y = "Frequency"
+  ) +
+  theme_cowplot()
+```
+]
+
+.pull-right[
+![](intro_ggplot2_slides_files/figure-html/unnamed-chunk-69-1.png)&lt;!-- --&gt;
+]
+---
+name: histograms2
+
+# Showing distributions: Histograms
+
+&lt;img src="https://royalsocietypublishing.org/cms/asset/f0e521bc-ad59-4933-b86f-a1b11bc009d4/rsos202049f01.jpg" width="70%" align="center" /&gt;
+
+(From &lt;https://royalsocietypublishing.org/doi/10.1098/rsos.202049&gt;)
+---
+name: density1
+
+# Showing distributions: Densityplots
+
+.pull-left[
+
+```r
+ggplot(
+  data = iris,
+  aes(
+    x = Sepal.Length
+  )
+) +
+  geom_density(
+    fill = "#009E73",
+    color = "#009E73"
+  ) +
+  labs(
+    x = "Sepal length",
+    y = "Density"
+  ) +
+  theme_cowplot()
+```
+]
+
+.pull-right[
+![](intro_ggplot2_slides_files/figure-html/unnamed-chunk-71-1.png)&lt;!-- --&gt;
+]
+---
+name:density2
+
+# Showing distributions: Densityplots by group
+
+.pull-left[
+We can show distributions in one graph.
+
+```r
+ggplot(
+  data = iris,
+  aes(
+    x = Sepal.Length,
+*   color = Species,
+*   fill = Species
+  )
+) +
+  geom_density(
+    alpha = 0.2
+  ) +
+  scale_fill_manual(values = c("#E69F00", "#56B4E9", "#009E73")) +
+  scale_color_manual(values = c("#E69F00", "#56B4E9", "#009E73")) +
+  labs(
+    x = "Sepal length",
+    y = "Density"
+  ) +
+  theme_cowplot()
+```
+Color from &lt;https://www.datanovia.com/en/blog/ggplot-colors-best-tricks-you-will-love/#use-a-colorblind-friendly-palette&gt;
+]
+
+.pull-right[
+![](intro_ggplot2_slides_files/figure-html/unnamed-chunk-73-1.png)&lt;!-- --&gt;
+]
+---
+name:density3
+
+# Showing distributions: Densityplots by group
+
+.pull-left[
+Or we show distributions by including a facet which shows subsets of the data.
+
+```r
+ggplot(
+  data = iris,
+  aes(
+    x = Sepal.Length,
+    color = Species,
+    fill = Species
+  )
+) +
+  geom_density(
+    alpha = 0.2
+  ) +
+* facet_wrap(~ Species) +
+  scale_fill_manual(values = c("#E69F00", "#56B4E9", "#009E73")) +
+  scale_color_manual(values = c("#E69F00", "#56B4E9", "#009E73")) +
+  labs(
+    x = "Sepal length",
+    y = "Density"
+  ) +
+  theme_cowplot()
+```
+]
+
+.pull-right[
+![](intro_ggplot2_slides_files/figure-html/unnamed-chunk-75-1.png)&lt;!-- --&gt;
+]
+
+---
+name: ridges
+
+# Showing distributions: Ridges
+
+.pull-left[
+Easily one of the prettiest ways to show distributions: `ggridges`.
+
+```r
+library(ggridges)
+
+ggplot(
+  data = iris,
+  aes(
+    x = Sepal.Length,
+    y = Species,
+    fill = Species
+  )
+) +
+* geom_density_ridges(
+*   alpha = 0.4
+  ) +
+  scale_fill_manual(values = c("#E69F00", "#56B4E9", "#009E73")) +
+  scale_color_manual(values = c("#E69F00", "#56B4E9", "#009E73")) +
+  labs(
+    x = "Sepal length",
+    y = "Sepal Length"
+  ) +
+  theme_cowplot() +
+  theme(legend.position = "none")
+```
+]
+
+.pull-right[
+![](intro_ggplot2_slides_files/figure-html/unnamed-chunk-77-1.png)&lt;!-- --&gt;
+]
+---
+name: beeswarm1
+
+# Showing distributions: Beeswarms
+
+.pull-left[
+
+```r
+library(ggbeeswarm)
+
+ggplot(
+  data = iris,
+  aes(
+    x = Species,
+    y = Sepal.Length,
+    color = Species
+  )
+) +
+  geom_beeswarm() +
+  labs(
+    x = "Species",
+    y = "Sepal length"
+  ) +
+  theme_cowplot() +
+  theme(legend.position = "none")
+```
+]
+
+.pull-right[
+![](intro_ggplot2_slides_files/figure-html/unnamed-chunk-79-1.png)&lt;!-- --&gt;
+]
+
+---
+name: beeswarm2
+
+# Showing distributions: Beeswarms
+
+&lt;img src="https://digital-wellbeing.github.io/smartphone-use/analysis_report_files/figure-html/figure1-1.png" width="70%" align="center" /&gt;
+
+(From https://digital-wellbeing.github.io/smartphone-use/descriptives-and-visualizations.html#plots-for-paper)
+
+---
+name: rainclouds
+
+# Showing distributions: Rainclouds
+
+.pull-left[
+Check &lt;https://github.com/jorvlan/raincloudplots&gt;
+.small[
+
+```r
+library(raincloudplots)
+
+# create data set in correct format
+df_1x1 &lt;- data_1x1(
+  array_1 = iris$Sepal.Length[1:50],
+  array_2 = iris$Sepal.Length[51:100],
+  jit_distance = .09,
+  jit_seed = 321)
+
+# create plot
+raincloud &lt;- raincloud_1x1_repmes(
+  data = df_1x1,
+  colors = (c('dodgerblue', 'darkorange')),
+  fills = (c('dodgerblue', 'darkorange')),
+  line_color = 'gray',
+  line_alpha = .8,
+  size = 2,
+  alpha = .3,
+  align_clouds = FALSE) +
+  scale_x_continuous(breaks=c(1,2), labels=c("Pre", "Post"), limits=c(0, 3)) +
+  xlab("Time") + 
+  ylab("Score") +
+  theme_classic()
+
+raincloud
+```
+]
+]
+
+.pull-right[
+![](intro_ggplot2_slides_files/figure-html/unnamed-chunk-81-1.png)&lt;!-- --&gt;
+]
+---
+name: rainclouds2
+
+# Showing distributions: Rainclouds
+&lt;img src="https://digital-wellbeing.github.io/smartphone-use/analysis_report_files/figure-html/traits-visualize-1.png" width="45%" align="center" /&gt;
+
+(From &lt;https://digital-wellbeing.github.io/smartphone-use/descriptives-and-visualizations.html#meta-level&gt;)
+
+---
+name: scatterplot
+
+# Showing regression results
+
+
+
+Contrived example: Is intelligence related to ratings of chess players? And does going to a chess club as a kid influence that relation?
+.pull-left[
+
+```r
+ggplot(
+  data = chess,
+  aes(
+    x = intelligence,
+    y = rating
+  )
+) +
+  geom_point() +
+  geom_smooth(
+    method = "lm"
+  ) +
+  theme_cowplot()
+```
+]
+
+.pull-right[
+![](intro_ggplot2_slides_files/figure-html/unnamed-chunk-84-1.png)&lt;!-- --&gt;
+]
+
+---
+name: scatterplot2
+
+# Showing regression results
+
+.pull-left[
+
+```r
+ggplot(
+  data = chess,
+  aes(
+    x = intelligence,
+    y = rating,
+*   color = chess_club
+  )
+) +
+  geom_point() +
+  geom_smooth(
+    method = "lm"
+  ) +
+  theme_cowplot()
+```
+]
+
+.pull-right[
+![](intro_ggplot2_slides_files/figure-html/unnamed-chunk-86-1.png)&lt;!-- --&gt;
+]
+
+---
+name: scatterplot3
+
+# Showing regression results
+
+.pull-left[
+
+```r
+ggplot(
+  data = chess,
+  aes(
+    x = intelligence,
+    y = rating,
+    color = chess_club
+  )
+) +
+  geom_point() +
+  geom_smooth(
+    method = "lm"
+  ) +
+* facet_wrap(~ chess_club) +
+  theme_cowplot()
+```
+]
+
+.pull-right[
+![](intro_ggplot2_slides_files/figure-html/unnamed-chunk-88-1.png)&lt;!-- --&gt;
+]
+---
+name: regression-plot
+
+# Showing regression results
+
+Let's run a simple regression: With each IQ point, our rating goes up, but especially when we went to a chess club as a kid.
+.small[
+
+```r
+my_regression &lt;- 
+  lm(
+    rating ~ intelligence * chess_club, 
+    data = chess
+    )
+
+summary(my_regression)
+```
+
+```
+## 
+## Call:
+## lm(formula = rating ~ intelligence * chess_club, data = chess)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -87.764 -19.817  -0.248  19.971 107.537 
+## 
+## Coefficients:
+##                            Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)                47.89057    8.90080   5.380 9.26e-08 ***
+## intelligence                1.52048    0.08834  17.211  &lt; 2e-16 ***
+## chess_clubYes              -0.01170   12.55811  -0.001    0.999    
+## intelligence:chess_clubYes  0.69831    0.12466   5.602 2.74e-08 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 29.62 on 996 degrees of freedom
+## Multiple R-squared:  0.6986,	Adjusted R-squared:  0.6977 
+## F-statistic: 769.4 on 3 and 996 DF,  p-value: &lt; 2.2e-16
+```
+]
+
+---
+name: regression-plot2
+
+# Showing regression results
+
+Let's turn that summary into a data set that we can visualize.
+
+```r
+regression_dat &lt;- 
+  coef(my_regression) %&gt;% 
+  as_tibble(rownames = "effect") %&gt;% 
+  rename(estimate = value) %&gt;% 
+  left_join(
+    .,
+    confint(my_regression) %&gt;% 
+      as_tibble(rownames = "effect"),
+    by = c("effect")
+  ) %&gt;% 
+  filter(effect != "(Intercept)") %&gt;% 
+  mutate(effect = as.factor(effect))
+```
+
+&lt;table&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;"&gt; effect &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; estimate &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; 2.5 % &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; 97.5 % &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; intelligence &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1.5204776 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1.3471154 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1.6938398 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; chess_clubYes &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -0.0117050 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -24.6551045 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 24.6316946 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; intelligence:chess_clubYes &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.6983115 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.4536883 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.9429347 &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+---
+name: regression-plot2
+
+# Showing regression results
+
+With that data set, we can visualize the outcomes of the regression.
+.pull-left[
+
+```r
+ggplot(
+  data = regression_dat,
+  aes(
+    x = estimate,
+    y = effect
+  )
+) +
+  geom_vline(
+    xintercept = 0,
+    linetype = "dashed"
+  ) +
+  geom_pointrange(
+    aes(
+      xmin = `2.5 %`,
+      xmax = `97.5 %`
+    ),
+    color = "#009E73",
+    size = 0.7
+  ) +
+  theme_cowplot()
+```
+]
+
+.pull-right[
+![](intro_ggplot2_slides_files/figure-html/unnamed-chunk-93-1.png)&lt;!-- --&gt;
+]
+---
+name: regression-plot3
+
+# Showing regression results
+
+Actually, let's scale the predictor so that the intelligence effect represents the increase for every ten points in IQ.
+.small[
+.pull-left[
+
+```r
+ggplot(
+  data = regression_dat %&gt;% 
+    mutate(
+      across(
+        -effect,
+        ~ case_when(
+          effect != "chess_clubYes" ~ .x * 10,
+          TRUE ~ .x
+        )
+      )
+    ),
+  aes(
+    x = estimate,
+    y = effect
+  )
+) +
+  geom_vline(
+    xintercept = 0,
+    linetype = "dashed",
+    color = "grey",
+    alpha = 0.6
+  ) +
+  geom_pointrange(
+    aes(
+      xmin = `2.5 %`,
+      xmax = `97.5 %`
+    ),
+    color = "#009E73",
+    size = 0.7
+  ) +
+  theme_cowplot() +
+  theme(
+    axis.title.y = element_blank()
+  )
+```
+]
+]
+
+.pull-right[
+![](intro_ggplot2_slides_files/figure-html/unnamed-chunk-95-1.png)&lt;!-- --&gt;
+]
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
