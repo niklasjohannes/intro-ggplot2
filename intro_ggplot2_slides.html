@@ -289,7 +289,7 @@ name: layers
 - **data**: observations organized as variables
 - **aesthetic mapping**: maps variables in the data to aesthetic qualities/categories (e.g., variables to color or shape)
 - **scales**: implement the mapping, turning values in the data into values in the graph (e.g., how groups get assigned colors, create axes and legends)
-- **geometric objects (geoms)**: turns values in the data into geometric objects (e.g., points lines)
+- **geometric objects (geoms)**: turns values in the data into geometric objects ((e.g., points, lines)
 - **stats**: summarize and transform data values
 - **facets**: how shall we "split up" the graph into displaying subsets of the data
 - **coord**: coordinate system, how are data coordinates translated to the space of the graph
@@ -493,6 +493,33 @@ ggplot(
 ]
 
 ---
+name: layers-facets
+
+# Adding another geom
+
+.pull-left[
+Layered grammar in action: Adding another geom.
+
+```r
+ggplot(
+  data = my_cars,
+  aes(
+    x = mpg,
+    y = disp
+  )
+) +
+  geom_point() +
+* geom_smooth(
+*   method = "lm"
+* )
+```
+]
+
+.pull-right[
+![](intro_ggplot2_slides_files/figure-html/unnamed-chunk-21-1.png)&lt;!-- --&gt;
+]
+
+---
 name: revisit-aesthetics1
 
 # Back to aesthetic mapping
@@ -514,7 +541,7 @@ ggplot(
 ]
 
 .pull-right[
-![](intro_ggplot2_slides_files/figure-html/unnamed-chunk-21-1.png)&lt;!-- --&gt;
+![](intro_ggplot2_slides_files/figure-html/unnamed-chunk-23-1.png)&lt;!-- --&gt;
 ]
 
 ---
@@ -566,7 +593,7 @@ ggplot(
 ]
 
 .pull-right[
-![](intro_ggplot2_slides_files/figure-html/unnamed-chunk-24-1.png)&lt;!-- --&gt;
+![](intro_ggplot2_slides_files/figure-html/unnamed-chunk-26-1.png)&lt;!-- --&gt;
 ]
 
 ---
@@ -594,7 +621,7 @@ ggplot(
 ]
 
 .pull-right[
-![](intro_ggplot2_slides_files/figure-html/unnamed-chunk-26-1.png)&lt;!-- --&gt;
+![](intro_ggplot2_slides_files/figure-html/unnamed-chunk-28-1.png)&lt;!-- --&gt;
 ]
 
 ---
@@ -622,7 +649,7 @@ ggplot(
 ]
 
 .pull-right[
-![](intro_ggplot2_slides_files/figure-html/unnamed-chunk-28-1.png)&lt;!-- --&gt;
+![](intro_ggplot2_slides_files/figure-html/unnamed-chunk-30-1.png)&lt;!-- --&gt;
 ]
 
 ---
@@ -654,7 +681,7 @@ ggplot(
 
 .pull-right[
 We didn't tell `ggplot2` anywhere that the line colors should be mapped to a variable.
-![](intro_ggplot2_slides_files/figure-html/unnamed-chunk-30-1.png)&lt;!-- --&gt;
+![](intro_ggplot2_slides_files/figure-html/unnamed-chunk-32-1.png)&lt;!-- --&gt;
 ]
 
 ---
@@ -688,7 +715,7 @@ ggplot(
 ]
 
 .pull-right[
-![](intro_ggplot2_slides_files/figure-html/unnamed-chunk-32-1.png)&lt;!-- --&gt;
+![](intro_ggplot2_slides_files/figure-html/unnamed-chunk-34-1.png)&lt;!-- --&gt;
 ]
 
 ---
@@ -716,7 +743,7 @@ ggplot(
 ]
 
 .pull-right[
-![](intro_ggplot2_slides_files/figure-html/unnamed-chunk-34-1.png)&lt;!-- --&gt;
+![](intro_ggplot2_slides_files/figure-html/unnamed-chunk-36-1.png)&lt;!-- --&gt;
 ]
 
 ---
@@ -748,7 +775,7 @@ ggplot(
 ]
 
 .pull-right[
-![](intro_ggplot2_slides_files/figure-html/unnamed-chunk-36-1.png)&lt;!-- --&gt;
+![](intro_ggplot2_slides_files/figure-html/unnamed-chunk-38-1.png)&lt;!-- --&gt;
 ]
 
 ---
@@ -785,7 +812,7 @@ ggplot(
 ## Warning: Removed 29 rows containing missing values (geom_point).
 ```
 
-![](intro_ggplot2_slides_files/figure-html/unnamed-chunk-38-1.png)&lt;!-- --&gt;
+![](intro_ggplot2_slides_files/figure-html/unnamed-chunk-40-1.png)&lt;!-- --&gt;
 ]
 
 ---
@@ -812,7 +839,7 @@ ggplot(
 ]
 
 .pull-right[
-![](intro_ggplot2_slides_files/figure-html/unnamed-chunk-40-1.png)&lt;!-- --&gt;
+![](intro_ggplot2_slides_files/figure-html/unnamed-chunk-42-1.png)&lt;!-- --&gt;
 ]
 
 ---
@@ -844,7 +871,7 @@ ggplot(
 ]
 
 .pull-right[
-![](intro_ggplot2_slides_files/figure-html/unnamed-chunk-42-1.png)&lt;!-- --&gt;
+![](intro_ggplot2_slides_files/figure-html/unnamed-chunk-44-1.png)&lt;!-- --&gt;
 ]
 
 ---
@@ -919,7 +946,7 @@ ggplot(
 ]
 
 .pull-right[
-![](intro_ggplot2_slides_files/figure-html/unnamed-chunk-46-1.png)&lt;!-- --&gt;
+![](intro_ggplot2_slides_files/figure-html/unnamed-chunk-48-1.png)&lt;!-- --&gt;
 ]
 
 ---
@@ -952,7 +979,7 @@ ggplot(
 ]
 
 .pull-right[
-![](intro_ggplot2_slides_files/figure-html/unnamed-chunk-48-1.png)&lt;!-- --&gt;
+![](intro_ggplot2_slides_files/figure-html/unnamed-chunk-50-1.png)&lt;!-- --&gt;
 ]
 
 ---
@@ -986,7 +1013,7 @@ ggplot(
 ]
 
 .pull-right[
-![](intro_ggplot2_slides_files/figure-html/unnamed-chunk-50-1.png)&lt;!-- --&gt;
+![](intro_ggplot2_slides_files/figure-html/unnamed-chunk-52-1.png)&lt;!-- --&gt;
 ]
 
 ---
@@ -1013,7 +1040,7 @@ ggplot(
 ]
 
 .pull-right[
-![](intro_ggplot2_slides_files/figure-html/unnamed-chunk-52-1.png)&lt;!-- --&gt;
+![](intro_ggplot2_slides_files/figure-html/unnamed-chunk-54-1.png)&lt;!-- --&gt;
 ]
 ---
 name: mixing-data-frames3
@@ -1049,7 +1076,7 @@ ggplot(
 ]
 
 .pull-right[
-![](intro_ggplot2_slides_files/figure-html/unnamed-chunk-54-1.png)&lt;!-- --&gt;
+![](intro_ggplot2_slides_files/figure-html/unnamed-chunk-56-1.png)&lt;!-- --&gt;
 ]
 ---
 name: mixing-data-frames4
@@ -1096,7 +1123,7 @@ ggplot(
 ]
 
 .pull-right[
-![](intro_ggplot2_slides_files/figure-html/unnamed-chunk-56-1.png)&lt;!-- --&gt;
+![](intro_ggplot2_slides_files/figure-html/unnamed-chunk-58-1.png)&lt;!-- --&gt;
 ]
 ---
 name: making-it-pretty
@@ -1147,7 +1174,7 @@ ggplot(
 ]
 
 .pull-right[
-![](intro_ggplot2_slides_files/figure-html/unnamed-chunk-58-1.png)&lt;!-- --&gt;
+![](intro_ggplot2_slides_files/figure-html/unnamed-chunk-60-1.png)&lt;!-- --&gt;
 ]
 
 ---
@@ -1155,7 +1182,7 @@ name: layers-as-objects1
 
 # Graphs (and layers) as objects
 
-R is an object-based language, and `ggplot2` is not exception. It saves us time and makes treating layers of the plot as building blocks easier.
+R is an object-based language, and `ggplot2` is no exception. It saves us time and makes treating layers of the plot as building blocks easier.
 
 .pull-left[
 
@@ -1176,7 +1203,7 @@ layer1
 ]
 
 .pull-right[
-![](intro_ggplot2_slides_files/figure-html/unnamed-chunk-60-1.png)&lt;!-- --&gt;
+![](intro_ggplot2_slides_files/figure-html/unnamed-chunk-62-1.png)&lt;!-- --&gt;
 ]
 ---
 name: layers-as-objects3
@@ -1199,7 +1226,7 @@ layer1 + layer2
 ]
 
 .pull-right[
-![](intro_ggplot2_slides_files/figure-html/unnamed-chunk-62-1.png)&lt;!-- --&gt;
+![](intro_ggplot2_slides_files/figure-html/unnamed-chunk-64-1.png)&lt;!-- --&gt;
 ]
 ---
 name: layers-as-objects4
@@ -1220,7 +1247,7 @@ layer1 + layer2
 ]
 
 .pull-right[
-![](intro_ggplot2_slides_files/figure-html/unnamed-chunk-64-1.png)&lt;!-- --&gt;
+![](intro_ggplot2_slides_files/figure-html/unnamed-chunk-66-1.png)&lt;!-- --&gt;
 ]
 ---
 name: layers-as-objects5
@@ -1238,6 +1265,7 @@ our_figure &lt;-
   layer2 +
   geom_point(
     data = my_stats,
+    size = 4,
     aes(
       x = cyl,
       y = mean,
@@ -1267,7 +1295,7 @@ our_figure
 ]
 
 .pull-right[
-![](intro_ggplot2_slides_files/figure-html/unnamed-chunk-66-1.png)&lt;!-- --&gt;
+![](intro_ggplot2_slides_files/figure-html/unnamed-chunk-68-1.png)&lt;!-- --&gt;
 ]
 
 ---
@@ -1318,7 +1346,7 @@ ggplot(
 ]
 
 .pull-right[
-![](intro_ggplot2_slides_files/figure-html/unnamed-chunk-69-1.png)&lt;!-- --&gt;
+![](intro_ggplot2_slides_files/figure-html/unnamed-chunk-71-1.png)&lt;!-- --&gt;
 ]
 ---
 name: histograms2
@@ -1355,7 +1383,7 @@ ggplot(
 ]
 
 .pull-right[
-![](intro_ggplot2_slides_files/figure-html/unnamed-chunk-71-1.png)&lt;!-- --&gt;
+![](intro_ggplot2_slides_files/figure-html/unnamed-chunk-73-1.png)&lt;!-- --&gt;
 ]
 ---
 name:density2
@@ -1389,7 +1417,7 @@ ggplot(
 ]
 
 .pull-right[
-![](intro_ggplot2_slides_files/figure-html/unnamed-chunk-73-1.png)&lt;!-- --&gt;
+![](intro_ggplot2_slides_files/figure-html/unnamed-chunk-75-1.png)&lt;!-- --&gt;
 ]
 ---
 name:density3
@@ -1423,7 +1451,7 @@ ggplot(
 ]
 
 .pull-right[
-![](intro_ggplot2_slides_files/figure-html/unnamed-chunk-75-1.png)&lt;!-- --&gt;
+![](intro_ggplot2_slides_files/figure-html/unnamed-chunk-77-1.png)&lt;!-- --&gt;
 ]
 
 ---
@@ -1460,7 +1488,7 @@ ggplot(
 ]
 
 .pull-right[
-![](intro_ggplot2_slides_files/figure-html/unnamed-chunk-77-1.png)&lt;!-- --&gt;
+![](intro_ggplot2_slides_files/figure-html/unnamed-chunk-79-1.png)&lt;!-- --&gt;
 ]
 ---
 name: beeswarm1
@@ -1491,7 +1519,7 @@ ggplot(
 ]
 
 .pull-right[
-![](intro_ggplot2_slides_files/figure-html/unnamed-chunk-79-1.png)&lt;!-- --&gt;
+![](intro_ggplot2_slides_files/figure-html/unnamed-chunk-81-1.png)&lt;!-- --&gt;
 ]
 
 ---
@@ -1543,7 +1571,7 @@ raincloud
 ]
 
 .pull-right[
-![](intro_ggplot2_slides_files/figure-html/unnamed-chunk-81-1.png)&lt;!-- --&gt;
+![](intro_ggplot2_slides_files/figure-html/unnamed-chunk-83-1.png)&lt;!-- --&gt;
 ]
 ---
 name: rainclouds2
@@ -1580,7 +1608,7 @@ ggplot(
 ]
 
 .pull-right[
-![](intro_ggplot2_slides_files/figure-html/unnamed-chunk-84-1.png)&lt;!-- --&gt;
+![](intro_ggplot2_slides_files/figure-html/unnamed-chunk-86-1.png)&lt;!-- --&gt;
 ]
 
 ---
@@ -1608,7 +1636,7 @@ ggplot(
 ]
 
 .pull-right[
-![](intro_ggplot2_slides_files/figure-html/unnamed-chunk-86-1.png)&lt;!-- --&gt;
+![](intro_ggplot2_slides_files/figure-html/unnamed-chunk-88-1.png)&lt;!-- --&gt;
 ]
 
 ---
@@ -1637,7 +1665,7 @@ ggplot(
 ]
 
 .pull-right[
-![](intro_ggplot2_slides_files/figure-html/unnamed-chunk-88-1.png)&lt;!-- --&gt;
+![](intro_ggplot2_slides_files/figure-html/unnamed-chunk-90-1.png)&lt;!-- --&gt;
 ]
 ---
 name: regression-plot
@@ -1767,7 +1795,7 @@ ggplot(
 ]
 
 .pull-right[
-![](intro_ggplot2_slides_files/figure-html/unnamed-chunk-93-1.png)&lt;!-- --&gt;
+![](intro_ggplot2_slides_files/figure-html/unnamed-chunk-95-1.png)&lt;!-- --&gt;
 ]
 ---
 name: regression-plot3
@@ -1818,8 +1846,16 @@ ggplot(
 ]
 
 .pull-right[
-![](intro_ggplot2_slides_files/figure-html/unnamed-chunk-95-1.png)&lt;!-- --&gt;
+![](intro_ggplot2_slides_files/figure-html/unnamed-chunk-97-1.png)&lt;!-- --&gt;
 ]
+
+---
+name: credit
+
+# Where I stole from
+
+- Philipp Masur
+- [Jeffrey Girard](https://speakerdeck.com/jmgirard/data-visualization-principles-and-practice?slide=11)
 
 ---
 class: inverse, center, middle
