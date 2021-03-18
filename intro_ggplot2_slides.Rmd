@@ -1,7 +1,7 @@
 ---
 title: "An intro to data visualization with ggplot2"
 author: 'Niklas Johannes<br>  <a href="https://www.oii.ox.ac.uk/">Oxford Internet Institute</a><br><a href="http://twitter.com/NiklasJohannes"> <i class="fa fa-twitter fa-fw"></i>&nbsp; @NiklasJohannes</a>'
-date: "2021-03-19<br><br><br>Slides available at: <github.com>"
+date: "2021-03-19<br><br><br>Slides available at: https://niklasjohannes.github.io/intro-ggplot2/"
 output:
   xaringan::moon_reader:
     css: "my-theme.css"
@@ -61,8 +61,10 @@ name: why-visualize
 name: anscombe
 
 # Anscombe's Quartett
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/Anscombe%27s_quartet_3.svg/1200px-Anscombe%27s_quartet_3.svg.png" width="70%" align="center" />
 
-![Anscombe](https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/Anscombe%27s_quartet_3.svg/1200px-Anscombe%27s_quartet_3.svg.png)
+
+.small[<https://en.wikipedia.org/wiki/Anscombe%27s_quartet>]
 ---
 name: datasaurus
 
@@ -70,15 +72,16 @@ name: datasaurus
 
 ![Datasaurus](https://blog.revolutionanalytics.com/downloads/DataSaurus%20Dozen.gif)
 
-(Alberto Cairo)
+.small[(Alberto Cairo, <https://www.autodesk.com/research/publications/same-stats-different-graphs>)]
 ---
 name: fox-news
 
 # What responsibility?
+<img src="http://freerangestats.info/img/0176-fox-original.jfif" width="70%" align="center" />
 
-![Fox](http://freerangestats.info/img/0176-fox-original.jfif)
+.small[(Recreate properly with ggplot2: <http://freerangestats.info/blog/2020/04/06/crazy-fox-y-axis>)
 
-(Recreate properly with ggplot2: <http://freerangestats.info/blog/2020/04/06/crazy-fox-y-axis>)
+(More examples: <https://www.reddit.com/r/dataisugly/>)]
 ---
 name: propaganda
 
@@ -90,9 +93,9 @@ name: propaganda
 - Hiding relevant data to highlight what benefits us
 - Displaying too much data to obscure reality
 - Using graphic forms in inappropriate ways (distorting the data)
-
-(Cairo, A. (2015). Graphics lies, misleading visuals. In New challenges for data design (pp. 103-116). Springer, London.)
 ]
+
+.small[(Cairo, A. (2015). Graphics lies, misleading visuals. In New challenges for data design (pp. 103-116). Springer, London.)]
 
 ---
 name: distorted-academia
@@ -164,9 +167,10 @@ name: principles2
 1. Keep it simple and stupid
 2. **Show your data**
 
-![Ban-bar-graphs](https://storage.googleapis.com/plos-corpus-prod/10.1371/journal.pbio.1002128/1/pbio.1002128.g001.PNG_L?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=wombat-sa%40plos-prod.iam.gserviceaccount.com%2F20210316%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20210316T093312Z&X-Goog-Expires=3600&X-Goog-SignedHeaders=host&X-Goog-Signature=072660ae0abe9de5b52d557ca8cc5665308d572ade0820e9ab0df0d71703ac2d5d3a3a9153f0da9bde27cd9c537ac21f7d7e9e553e0173a5d80e2b8808caa7d292cf510a4dc6c578017eb0b898c4da1f627c64a20a21799286d167564c41b3dd2a162a7cab61babdcb7d555c66f364b194bb363b875acadd2024d8c160a2e0300bfb38f235501e317d391135ca8d1d4c241d895e1f4b27450b0fe6dd62dc74129090e974b35436fdc21c038da2fc5706ca6ebe96162179c1ac39ba1dc40993733c3975a0ad60f917d47f5b2e2f0f42a34e23ef7f8ec4d64cfdf0cead4877e50259ee22140078defd0c002bd4254042e47126f4487466130a9d3340a47ab35941)
+<img src="materials/bar_graphs.png" width="60%" align="center" />
 
-(From Weissgerber, T. L., Milic, N. M., Winham, S. J., & Garovic, V. D. (2015). Beyond bar and line graphs: time for a new data presentation paradigm. PLoS Biol, 13(4), e1002128.)
+
+.small[(From Weissgerber, T. L., Milic, N. M., Winham, S. J., & Garovic, V. D. (2015). Beyond bar and line graphs: time for a new data presentation paradigm. PLoS Biol, 13(4), e1002128.)]
 ---
 
 name: principles2.2
@@ -178,7 +182,7 @@ name: principles2.2
 
 ![Bar-bar-graphs](materials/kickstarter.jpg)
 
-(From <https://www.kickstarter.com/projects/1474588473/barbarplots>)
+.small[(From <https://www.kickstarter.com/projects/1474588473/barbarplots>)]
 ---
 name: principles3
 
@@ -196,7 +200,7 @@ name: principles3
 ![High-Ratio](https://infovis-wiki.net/w/images/1/1b/Dir2.png)
 ]
 
-(From <https://infovis-wiki.net/wiki/Data-Ink_Ratio>)
+.small[(From <https://infovis-wiki.net/wiki/Data-Ink_Ratio>)]
 ---
 name: principles4
 
@@ -243,7 +247,7 @@ name: principles5
 ![Two-Axes-Two-Plots](https://blog.datawrapper.de/img/full-180508_index10.png)
 ]
 
-(From <https://blog.datawrapper.de/dualaxis/>)
+.small[(From <https://blog.datawrapper.de/dualaxis/>)]
 ---
 name: principles6
 
@@ -329,8 +333,9 @@ name: grammar2
 - Combine and shuffle them to create any kind of graph you want
 - The use of these layers is hierarchical and logically consistent
 
-(From <https://towardsdatascience.com/a-comprehensive-guide-to-the-grammar-of-graphics-for-effective-visualization-of-multi-dimensional-1f92b4ed4149>)
-(See also <http://vita.had.co.nz/papers/layered-grammar.pdf>)
+.small[(From <https://towardsdatascience.com/a-comprehensive-guide-to-the-grammar-of-graphics-for-effective-visualization-of-multi-dimensional-1f92b4ed4149>)
+
+(See Wickham's [paper](http://vita.had.co.nz/papers/layered-grammar.pdf))]
 ---
 name: layers
 
@@ -493,7 +498,7 @@ ggplot(
 ]
 
 .pull-right[
-```{r, echo=FALSE}
+```{r, echo=FALSE, message=FALSE}
 ggplot(
   data = my_cars,
   aes(
@@ -627,7 +632,7 @@ ggplot(
 ]
 
 .pull-right[
-```{r, echo=FALSE}
+```{r, echo=FALSE, message=FALSE}
 ggplot(
   data = my_cars,
   aes(
@@ -858,7 +863,7 @@ ggplot(
 ]
 
 .pull-right[
-```{r, echo=FALSE, message=FALSE}
+```{r, echo=FALSE, message=FALSE, size=2}
 ggplot(
   data = my_cars,
   aes(
@@ -1560,12 +1565,9 @@ ggsave(
 ```
 
 ---
-name: examples-overview
+class: inverse, center, middle
 
-# Some more examples
-
-1. Showing distributions
-2. Showing (regression) results
+# 4. Some basic examples
 
 ---
 name: histograms1
@@ -1615,7 +1617,7 @@ name: histograms2
 
 <img src="https://royalsocietypublishing.org/cms/asset/f0e521bc-ad59-4933-b86f-a1b11bc009d4/rsos202049f01.jpg" width="70%" align="center" />
 
-(From <https://royalsocietypublishing.org/doi/10.1098/rsos.202049>)
+.small[(From <https://royalsocietypublishing.org/doi/10.1098/rsos.202049>)]
 ---
 name: density1
 
@@ -1687,7 +1689,7 @@ ggplot(
   ) +
   theme_cowplot()
 ```
-Color from <https://www.datanovia.com/en/blog/ggplot-colors-best-tricks-you-will-love/#use-a-colorblind-friendly-palette>
+.small[Color from <https://www.datanovia.com/en/blog/ggplot-colors-best-tricks-you-will-love/#use-a-colorblind-friendly-palette>]
 ]
 
 .pull-right[
@@ -1875,7 +1877,7 @@ name: beeswarm2
 
 <img src="https://digital-wellbeing.github.io/smartphone-use/analysis_report_files/figure-html/figure1-1.png" width="70%" align="center" />
 
-(From https://digital-wellbeing.github.io/smartphone-use/descriptives-and-visualizations.html#plots-for-paper)
+.small[(From https://digital-wellbeing.github.io/smartphone-use/descriptives-and-visualizations.html#plots-for-paper)]
 
 ---
 name: rainclouds
@@ -1949,7 +1951,7 @@ name: rainclouds2
 # Showing distributions: Rainclouds
 <img src="https://digital-wellbeing.github.io/smartphone-use/analysis_report_files/figure-html/traits-visualize-1.png" width="45%" align="center" />
 
-(From <https://digital-wellbeing.github.io/smartphone-use/descriptives-and-visualizations.html#meta-level>)
+.small[(From <https://digital-wellbeing.github.io/smartphone-use/descriptives-and-visualizations.html#meta-level>)]
 
 ---
 name: scatterplot
@@ -2275,3 +2277,8 @@ ggplot(
   )
 ```
 ]
+
+---
+class: inverse, center, middle
+
+# 5. Questions?
